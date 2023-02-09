@@ -1,0 +1,33 @@
+﻿@using MoviesTime.Contract.Models;
+@model IEnumerable<TestModel>
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+<h2>My Movies List</h2>
+<table class="table"> 
+    <thead>
+        <tr>
+            <th>
+                    Id
+            </th>
+            <th>
+                    name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TestID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Hello from our View Template!</p>
