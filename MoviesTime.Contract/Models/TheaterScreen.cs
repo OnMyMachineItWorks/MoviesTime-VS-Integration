@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace MoviesTime.Contract.Models
 {
-    public class Movies
+    public class TheaterScreen
     {
         [Key]
-        public int MovieID { get; set; }
-        public string MovieName { get; set; }
-        public Theaters? TheaterID { get; set; }
-        public TimeSpan MovieLength { get; set; }
+        public int ScreenID { get; set; }
+        public String ScreenName { get; set; }
+        public Theaters TheaterID { get; set; }
+        public bool IsAvailable { get; set; }
         public bool IsActive { get; set; }
     }
 }

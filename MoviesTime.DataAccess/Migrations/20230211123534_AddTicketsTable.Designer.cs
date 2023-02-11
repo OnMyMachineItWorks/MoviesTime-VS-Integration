@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesTime.DataAccess.Database;
 
@@ -11,9 +12,11 @@ using MoviesTime.DataAccess.Database;
 namespace MoviesTime.Contract.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230211123534_AddTicketsTable")]
+    partial class AddTicketsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,55 +345,6 @@ namespace MoviesTime.Contract.Migrations
                     b.ToTable("Theaters");
                 });
 
-            modelBuilder.Entity("MoviesTime.Contract.Models.Tickets", b =>
-                {
-                    b.Property<int>("TicketID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketID"));
-
-                    b.Property<string>("CustomerContact")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FinalPrice")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("MovieEndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("MovieStartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RegisteredUserIDUserID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShowID1")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("TicketsCount")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("TransactionID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TicketID");
-
-                    b.HasIndex("RegisteredUserIDUserID");
-
-                    b.HasIndex("ShowID1");
-
-                    b.ToTable("Tickets");
-                });
-
             modelBuilder.Entity("MoviesTime.Contract.Models.Users", b =>
                 {
                     b.Property<int>("UserID")
@@ -550,25 +504,6 @@ namespace MoviesTime.Contract.Migrations
                         .IsRequired();
 
                     b.Navigation("ManagerID");
-                });
-
-            modelBuilder.Entity("MoviesTime.Contract.Models.Tickets", b =>
-                {
-                    b.HasOne("MoviesTime.Contract.Models.Users", "RegisteredUserID")
-                        .WithMany()
-                        .HasForeignKey("RegisteredUserIDUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MoviesTime.Contract.Models.MovieShows", "ShowID")
-                        .WithMany()
-                        .HasForeignKey("ShowID1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RegisteredUserID");
-
-                    b.Navigation("ShowID");
                 });
 #pragma warning restore 612, 618
         }
