@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-builder.Services.AddScoped<ITestInterface, TestRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // for hot reload after.net6.0
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -35,7 +35,7 @@ app.UseAuthorization();
 //app.MapDefaultControllerRoute();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
     );
 
 //app.MapGet("/", () => "Hello World!");

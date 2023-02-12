@@ -17,16 +17,16 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="index">
+                            <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="index">
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Customer" asp-action="index" >Customer</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Customer" asp-action="index" >Customer</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Theater" asp-action="index">Theater</a>
+                            <a class="nav-link" asp-area="TheaterManager" asp-controller="Theater" asp-action="index">Theater</a>
                         </li>
                         @*<li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>

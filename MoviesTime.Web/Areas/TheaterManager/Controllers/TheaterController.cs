@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MoviesTime.Web.Controllers.Theater
+namespace MoviesTime.Web.Areas.TheaterManager.Controllers
 {
+    [Area("TheaterManager")]
     public class TheaterController : Controller
     {
         public IActionResult Index()

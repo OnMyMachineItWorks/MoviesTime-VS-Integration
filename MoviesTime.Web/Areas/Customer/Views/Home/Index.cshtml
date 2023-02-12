@@ -1,5 +1,5 @@
 ﻿@using MoviesTime.Contract.Models;
-@model IEnumerable<TestModel>
+@model IEnumerable<Users>
 @{
     ViewData["Title"] = "Movie List";
 }
@@ -9,10 +9,10 @@
     <thead>
         <tr>
             <th>
-                    Id
+                    User ID
             </th>
             <th>
-                    name
+                    Username
             </th>
         </tr>
     </thead>
@@ -21,10 +21,13 @@
         {
             <tr>
                 <td>
-                    @item.TestID
+                    @item.UserID
                 </td>
                 <td>
-                    @item.Name
+                    @item.Username
+                </td>
+                <td>
+                    @(item.IsAdmin == true ? "Admin" : "Customer")
                 </td>
             </tr>
         }
