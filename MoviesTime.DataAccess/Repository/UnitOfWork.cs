@@ -11,9 +11,11 @@ namespace MoviesTime.DataAccess.Repository
         {
             _db = db;
             Users = new UsersRepository(_db);
+            Theaters = new TheatersRepository(_db);
         }
 
         public IUsersRepository Users { get; private set; }
+        public ITheatersRepository Theaters { get; private set; }
 
 
         // Save method Implementation

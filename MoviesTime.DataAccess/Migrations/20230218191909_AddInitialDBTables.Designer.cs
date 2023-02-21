@@ -9,11 +9,11 @@ using MoviesTime.DataAccess.Database;
 
 #nullable disable
 
-namespace MoviesTime.Contract.Migrations
+namespace MoviesTime.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230210202241_AddGenreTable")]
-    partial class AddGenreTable
+    [Migration("20230218191909_AddInitialDBTables")]
+    partial class AddInitialDBTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,24 +25,7 @@ namespace MoviesTime.Contract.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MoviesTime.Contract.Models.TestModel", b =>
-                {
-                    b.Property<int>("TestID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestID"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TestID");
-
-                    b.ToTable("TestTable");
-                });
-
-            modelBuilder.Entity("MoviesTime.Contract.Models.Theater", b =>
+            modelBuilder.Entity("MoviesTime.Contract.Models.Theaters", b =>
                 {
                     b.Property<int>("TheaterID")
                         .ValueGeneratedOnAdd()
@@ -53,20 +36,21 @@ namespace MoviesTime.Contract.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ManagerIDUserID")
+                    b.Property<int>("ManagerID")
                         .HasColumnType("int");
 
                     b.Property<string>("TheaterContact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TheaterName")
-                        .HasColumnType("int");
+                    b.Property<string>("TheaterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TheaterID");
 
-                    b.HasIndex("ManagerIDUserID");
+                    b.HasIndex("ManagerID");
 
-                    b.ToTable("Theater");
+                    b.ToTable("Theaters");
                 });
 
             modelBuilder.Entity("MoviesTime.Contract.Models.Users", b =>
@@ -96,15 +80,15 @@ namespace MoviesTime.Contract.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MoviesTime.Contract.Models.Theater", b =>
+            modelBuilder.Entity("MoviesTime.Contract.Models.Theaters", b =>
                 {
-                    b.HasOne("MoviesTime.Contract.Models.Users", "ManagerID")
+                    b.HasOne("MoviesTime.Contract.Models.Users", "Users")
                         .WithMany()
-                        .HasForeignKey("ManagerIDUserID")
+                        .HasForeignKey("ManagerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ManagerID");
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

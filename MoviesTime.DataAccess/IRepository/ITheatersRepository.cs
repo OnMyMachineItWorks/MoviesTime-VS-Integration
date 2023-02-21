@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoviesTime.Contract.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace MoviesTime.DataAccess.IRepository
 {
-    public interface IUnitOfWork
+    public interface ITheatersRepository : IRepository<Theaters>
     {
-        IUsersRepository Users { get; }
-        ITheatersRepository Theaters { get; }
-
-        void Save();
+        void Update(Theaters obj);
     }
 }
