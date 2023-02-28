@@ -11,7 +11,9 @@ namespace MoviesTime.Contract.ViewModels
     public class ManageTheatersViewModel
     {
         public List<Theaters>? lstTheaters { get; set; }
-        public IEnumerable<SelectListItem>? UsersList { get; set; }
+        public List<SelectListItem>? lstUsers { get; set; }
+        public Theaters? theaters { get; set; }
+        public bool isEditMode { get; set; } = false;
 
     }
 }

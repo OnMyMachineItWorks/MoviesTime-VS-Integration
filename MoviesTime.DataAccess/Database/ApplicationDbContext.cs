@@ -14,6 +14,7 @@ namespace MoviesTime.DataAccess.Database
         //add Dbset of added table models to generate migrations
         public DbSet<Users> Users { get; set; }
         public DbSet<Theaters> Theaters { get; set; }
+        public DbSet<TheaterScreen> TheaterScreens { get; set; }
         //public DbSet<Genres> Genres { get; set; }
         //public DbSet<Languages> Languages { get; set; }
         //public DbSet<Movies> Movies { get; set; }

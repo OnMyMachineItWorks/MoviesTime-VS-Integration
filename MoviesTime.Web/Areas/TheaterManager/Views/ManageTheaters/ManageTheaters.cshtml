@@ -2,40 +2,52 @@
 @model ManageTheatersViewModel
 
 <div class="container mx-2 pt-3">
-    <form>
-        <legend>Add a Theater</legend>
+    <form method="post">
+        <legend> @(Model.isEditMode == false ? "Add new theater" : "Edit Theater Details")</legend>
         <div class="form-group row mx-1">
             <div class="col-md-4 row pt-md-2">
-                <label class="col-form-label col-md-4">Theater Name</label>
+                <label class="col-form-label col-md-4" asp-for="theaters.TheaterName">Theater Name</label>
                 <div class="col-md-8">
-                    <input id="theaterName" class="form-control" placeholder="Enter Theater Name" />
+                    <input id="theaterName" class="form-control" placeholder="Enter Theater Name"
+                           name="theaters.TheaterName" asp-for="theaters.TheaterName" />
                 </div>
             </div>
             <div class="col-md-4 row pt-md-2 mx-1">
-                <label class="col-md-4 col-form-label">Manager ID</label>
+                <label class="col-md-4 col-form-label" asp-for="theaters.ManagerID">Manager ID</label>
                 <div class="col-md-8">
-                    @*<input id="managerID" class="form-control" placeholder="Enter Manager ID" />*@
-                    <select asp-items="Model.UsersList" name="Input.Selected.UserID" class="form-select" ></select>
+                    <select asp-items="Model.lstUsers" name="theaters.ManagerID" asp-for="theaters.ManagerID" class="form-select"></select>
                 </div>
             </div>
-
         </div>
         <div class="form-group row mx-1 pt-3">
             <div class="col-md-8 row pt-md-2">
-                <label class="col-md-2 col-form-label">Theater Contact</label>
+                <label class="col-md-2 col-form-label" asp-for="theaters.TheaterContact">Theater Contact</label>
                 <div class="col-md-10">
-                    <textarea id="managerID" class="form-control" placeholder="Enter Theater Contact"></textarea>
+                    <textarea id="theaterContact" class="form-control" placeholder="Enter Theater Contact" 
+                                name="theaters.TheaterContact" asp-for="theaters.TheaterContact">
+                    </textarea>
                 </div>
             </div>
-            @*<div class="col-md-4">
+            <div class="visually-hidden">
+                @* to store value of theater ID in Edit scenario*@
+                <input id="theaterID" asp-for="theaters.TheaterID" />
+            </div>
+            @*
+            <div class="col-md-4">
             <label for="staticEmail" class="col-md-2 col-form-label">Email</label>
             <div class="col-md-2">
             <input id="movieName" class="form-control" placeholder="Enter Movie Name" />
             </div>
-            </div>*@
+            </div>
+            *@
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
+            </div>
+        </div>
+        <div class="form-group row col-md-8 mx-1 pt-3">
+            <div class="text-center">
+                <button type="SubmitAction" asp-action="AddNewTheater" class="btn btn-primary">Submit</button>
             </div>
         </div>
 
@@ -43,16 +55,16 @@
 </div>
 
 <div class="container mx-5 pt-4">
-    @if(Model.lstTheaters != null)
+    @if (Model.lstTheaters != null)
     {
         <table class="table">
             <thead>
                 <tr>
                     <th>
-                        User ID
+                        Theater ID
                     </th>
                     <th>
-                        Username
+                        Theater Name
                     </th>
                     <th>
                         Manager ID
@@ -60,6 +72,13 @@
                     <th>
                         Theater Contact
                     </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -79,10 +98,17 @@
                         <td>
                             @item.TheaterContact
                         </td>
+                        <td>
+                            <a asp-area="TheaterManager" asp-controller="ManageTheaters" asp-action="EditTheater" asp-route-id="@item.TheaterID"><i class="bi bi-pencil-square">Edit</i></a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+    }
+    else
+    {
+        <h2>No Theaters Found</h2>
     }
 </div>
 

@@ -19,6 +19,6 @@ namespace MoviesTime.Contract.Models
         public int ManagerID { get; set; }
         
         public string? TheaterContact { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }
