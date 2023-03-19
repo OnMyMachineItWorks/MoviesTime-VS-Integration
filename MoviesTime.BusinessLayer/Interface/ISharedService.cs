@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace MoviesTime.BusinessLayer.Interface
 {
-    public interface ICustomer
+    public interface ISharedService
     {
-        
+        IEnumerable<Users> GetUsersList();
+        IEnumerable<Theaters> GetTheatersList();
+        Theaters GetTheaterByID(int id);
     }
 }

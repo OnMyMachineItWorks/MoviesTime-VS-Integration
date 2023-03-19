@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.BusinessLayer.Shared
+namespace MoviesTime.BusinessLayer.Interface
 {
-    internal class SharedServices
+    public interface ITheaterManager
     {
     }
 }

@@ -5,25 +5,24 @@ using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 using MoviesTime.DataAccess.Repository;
 
-
 namespace MoviesTime.Web.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private ICustomer _customer = null;
+        private ISharedService _sharedService = null;
 
-        public HomeController(IUnitOfWork unitOfWork, ICustomer customer)
+        public HomeController(IUnitOfWork unitOfWork, ISharedService sharedService)
         {
             _unitOfWork = unitOfWork;
-            _customer = customer;
+            _sharedService = sharedService;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Users> lstTest = _unitOfWork.Users.GetAll();
-            int s = _customer.GetUsersCount();
+            IEnumerable<Users> lstTest = _sharedService.GetUsersList();
+            //int s = _customer.GetUsersCount();
             return View(lstTest);
         }
     }

@@ -5,6 +5,7 @@ using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 using MoviesTime.DataAccess.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using MoviesTime.BusinessLayer.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICustomer, Customer>();
+builder.Services.AddScoped<ISharedService, SharedService>();
 
-// for hot reload after.net6.0
+// for hot reload after .net6.0
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 // middleware

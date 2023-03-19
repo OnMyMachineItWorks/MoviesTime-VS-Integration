@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="TheaterManager\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MoviesTime.DataAccess\MoviesTime.DataAccess.csproj" />
   </ItemGroup>
 

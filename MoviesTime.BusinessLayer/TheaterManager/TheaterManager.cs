@@ -1,5 +1,4 @@
 ﻿using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.Contract.Models;
 using MoviesTime.DataAccess.IRepository;
 using System;
 using System.Collections.Generic;
@@ -7,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.BusinessLayer.Customer
+namespace MoviesTime.BusinessLayer.TheaterManager
 {
-    public class Customer :ICustomer
+    public class TheaterManager :ITheaterManager
     {
         private readonly IUnitOfWork _unitOfWork;
-        public Customer(IUnitOfWork unitOfWork)
+        public TheaterManager(IUnitOfWork unitOfWork)
         {
-            _unitOfWork =unitOfWork;
+            _unitOfWork = unitOfWork;   
         }
 
-
+        
     }
 }

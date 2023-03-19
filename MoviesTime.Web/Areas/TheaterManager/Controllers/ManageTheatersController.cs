@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MoviesTime.BusinessLayer.Interface;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.DataAccess.IRepository;
@@ -10,10 +11,11 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
     public class ManageTheatersController : Controller 
     {
         //configure unit of work
-        private readonly IUnitOfWork _unitOfWork;
-        public ManageTheatersController(IUnitOfWork unitOfWork) 
+        private readonly ISharedService _sharedService;
+
+        public ManageTheatersController(ISharedService sharedService) 
         {
-            _unitOfWork = unitOfWork;
+            _sharedService = sharedService; 
         }
 
         /// <summary>
@@ -45,13 +47,13 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
             return RedirectToAction("ManageTheaters");
         }
 
-        public IActionResult EditTheater(int? id) 
+        public IActionResult EditTheater(int id) 
         {
             ManageTheatersViewModel viewModel = new ManageTheatersViewModel() 
             {
                 lstUsers = GetUsersAsSelectList(),
                 lstTheaters = GetTheaters(),
-                theaters = _unitOfWork.Theaters.GetFirstOrDefault(u => u.TheaterID == id),
+                theaters = _sharedService.GetTheaterByID(id),
                 isEditMode = true
             };
             return View("ManageTheaters", viewModel);
@@ -64,7 +66,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         // get users dropdown list values
         private List<SelectListItem> GetUsersAsSelectList() 
         {
-            return _unitOfWork.Users.GetAll()
+            return _sharedService.GetUsersList()
                                 .Select(i => new SelectListItem() 
                                 {
                                     Text = i.Username,
@@ -75,7 +77,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         // get main Grid/table data
         private List<Theaters> GetTheaters() 
         {
-            return _unitOfWork.Theaters.GetAll().ToList();
+            return _sharedService.GetTheatersList().ToList();
         }
     }
 }
