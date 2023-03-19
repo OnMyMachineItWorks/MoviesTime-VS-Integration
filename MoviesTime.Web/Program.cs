@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using MoviesTime.BusinessLayer.Customer;
+using MoviesTime.BusinessLayer.Interface;
 using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 using MoviesTime.DataAccess.Repository;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICustomer, Customer>();
 
 // for hot reload after.net6.0
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

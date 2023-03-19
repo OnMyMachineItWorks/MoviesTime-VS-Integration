@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.DataAccess.IRepository;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
 {
@@ -29,16 +30,17 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
             return View(viewModel);
         }
 
-        //Get Method for Theater Screens section
-        public IActionResult ManageTheaterScreens(ManageTheaterScreensViewModel viewModel) 
+        // Get Method for Theater Screens section
+        public IActionResult GetTheaterScreens(ManageTheaterScreensViewModel viewModel) 
         {
             if (viewModel.selectedTheaterID > 0) 
             {
                 List<TheaterScreen> theaterScreens = _unitOfWork.TheaterScreens.GetAll()
                                                         .Where(u => u.TheaterID == viewModel.selectedTheaterID)
                                                         .ToList();
+                viewModel.selectTheaterList = GetTheatersAsSelectList();
                 viewModel.theaterScreens = theaterScreens;
-                return View(viewModel);
+                return View("ManageTheaterScreens",viewModel);
             }
             return View(viewModel);
         }
