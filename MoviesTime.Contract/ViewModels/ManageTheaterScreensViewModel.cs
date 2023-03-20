@@ -13,5 +13,6 @@ namespace MoviesTime.Contract.ViewModels
         public int selectedTheaterID { get; set; }
         public List<TheaterScreen>? theaterScreens { get; set; }
         public List<SelectListItem>? selectTheaterList { get; set; }
+        public TheaterScreen? theaterScreen { get; set; }
     }
 }

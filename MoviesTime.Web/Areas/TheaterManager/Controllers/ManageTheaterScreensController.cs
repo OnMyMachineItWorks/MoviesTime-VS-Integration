@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.DataAccess.IRepository;
-using Microsoft.Extensions.DependencyInjection;
+using MoviesTime.BusinessLayer.Interface;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
 {
@@ -11,9 +11,11 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
     public class ManageTheaterScreensController : Controller 
     {
         public readonly IUnitOfWork _unitOfWork;
-        public ManageTheaterScreensController(IUnitOfWork unitOfWork) 
+        private readonly ISharedService _sharedService;
+        public ManageTheaterScreensController(IUnitOfWork unitOfWork, ISharedService sharedService) 
         {
             _unitOfWork = unitOfWork;
+            _sharedService = sharedService; 
         }
 
         /// <summary>
@@ -47,7 +49,8 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
 
 
         //private methods
-        private List<SelectListItem> GetTheatersAsSelectList() {
+        private List<SelectListItem> GetTheatersAsSelectList() 
+        {
             return _unitOfWork.Theaters.GetAll()
                                 .Select(i => new SelectListItem() 
                                 {

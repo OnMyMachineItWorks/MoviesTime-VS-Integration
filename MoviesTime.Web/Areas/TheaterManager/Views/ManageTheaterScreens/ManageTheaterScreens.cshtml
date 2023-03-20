@@ -6,15 +6,56 @@
         <legend> @(Model.selectedTheaterID == 0 ? "Select a Theater" : "Theater Screen Details")</legend>
         <div class="form-group row mx-1">
             <div class="col-md-4 row pt-md-2 mx-1">
-                <label class="col-md-4 col-form-label" asp-for="selectedTheaterID">Theater Name</label>
+                <label class="col-md-4 col-form-label">Theater Name</label>
                 <div class="col-md-8">
-                    <select asp-items="Model.selectTheaterList" asp-for="selectedTheaterID" class="form-select"></select>
+                    <select class="form-select" name="selectedTheaterID" asp-items="Model.selectTheaterList" asp-for="selectedTheaterID"></select>
                 </div>
             </div>
             <div class="text-center">
                 <button type="SubmitAction" asp-action="GetTheaterScreens" class="btn btn-primary">Search</button>
             </div>
         </div>
-        
+
+        @*Theater Screens Section*@
+        <legend> @(0 == 0 ? "Add Theater Screen" : "Update Theater Screen")</legend>
+        <div class="form-group row mx-1">
+            <div class="col-md-4 row pt-md-2">
+                <label class="col-form-label col-md-4">Theater Screen</label>
+                <div class="col-md-8">
+                    <input id="theaterScreen" class="form-control" placeholder="Enter Theater Screen" name="theater.TheaterScreen" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row mx-1 pt-3">
+            <div class="col-md-8 row pt-md-2">
+                <label class="col-md-2 col-form-label">Description (Optional)</label>
+                <div class="col-md-10">
+                    <textarea id="theaterScreenDescription" class="form-control" placeholder="Enter Description"
+                              name="theater.TheaterScreenDescription">
+                    </textarea>
+                </div>
+            </div>
+            <div class="visually-hidden">
+                @* to store value of theater ID in Edit scenario*@
+                <input id="theaterID" />
+            </div>
+            @*
+            <div class="col-md-4">
+            <label for="staticEmail" class="col-md-2 col-form-label">Email</label>
+            <div class="col-md-2">
+            <input id="movieName" class="form-control" placeholder="Enter Movie Name" />
+            </div>
+            </div>
+            *@
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="form-group row col-md-8 mx-1 pt-3">
+            <div class="text-center">
+                <button type="SubmitAction" asp-action="CreateNewTheater" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
     </form>
 </div>

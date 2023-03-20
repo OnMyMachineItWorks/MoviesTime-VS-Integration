@@ -34,11 +34,11 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Submit action method
-        public IActionResult CreateNewTheater(ManageTheatersViewModel theater) 
+        public IActionResult CreateNewTheater(ManageTheatersViewModel theaters) 
         {
-            if (theater.theaters != null 
-                    && theater.theaters.TheaterName != null 
-                    && theater.theaters.ManagerID > 0) 
+            if (theaters.theater != null 
+                    && theaters.theater.TheaterName != null 
+                    && theaters.theater.ManagerID > 0) 
             {
                 Console.WriteLine("|| Successfully triggered response ||");
                 //_unitOfWork.Theaters.Add(theater.theaters);
@@ -53,7 +53,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
             {
                 lstUsers = GetUsersAsSelectList(),
                 lstTheaters = GetTheaters(),
-                theaters = _sharedService.GetTheaterByID(id),
+                theater = _sharedService.GetTheaterByID(id),
                 isEditMode = true
             };
             return View("ManageTheaters", viewModel);
