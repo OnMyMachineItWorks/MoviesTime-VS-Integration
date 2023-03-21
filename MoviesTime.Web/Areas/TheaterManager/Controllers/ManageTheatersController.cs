@@ -34,7 +34,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Submit action method
-        public IActionResult CreateNewTheater(ManageTheatersViewModel theaters) 
+        public IActionResult CreateTheater(ManageTheatersViewModel theaters) 
         {
             if (theaters.theater != null 
                     && theaters.theater.TheaterName != null 

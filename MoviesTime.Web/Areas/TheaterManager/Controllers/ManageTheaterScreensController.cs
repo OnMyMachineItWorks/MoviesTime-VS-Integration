@@ -4,18 +4,19 @@ using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.DataAccess.IRepository;
 using MoviesTime.BusinessLayer.Interface;
+using MoviesTime.BusinessLayer.TheaterManager;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
 {
     [Area("TheaterManager")]
     public class ManageTheaterScreensController : Controller 
     {
-        public readonly IUnitOfWork _unitOfWork;
         private readonly ISharedService _sharedService;
-        public ManageTheaterScreensController(IUnitOfWork unitOfWork, ISharedService sharedService) 
+        private readonly ITheaterManager _theaterManager;
+        public ManageTheaterScreensController(ISharedService sharedService, ITheaterManager theaterManager) 
         {
-            _unitOfWork = unitOfWork;
-            _sharedService = sharedService; 
+            _sharedService = sharedService;
+            _theaterManager = theaterManager;
         }
 
         /// <summary>
@@ -37,11 +38,9 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         {
             if (viewModel.selectedTheaterID > 0) 
             {
-                List<TheaterScreen> theaterScreens = _unitOfWork.TheaterScreens.GetAll()
-                                                        .Where(u => u.TheaterID == viewModel.selectedTheaterID)
-                                                        .ToList();
+                List<TheaterScreen> theaterScreens = _theaterManager.GetTheaterScreensByTheaterID(viewModel.selectedTheaterID);
                 viewModel.selectTheaterList = GetTheatersAsSelectList();
-                viewModel.theaterScreens = theaterScreens;
+                viewModel.theaterScreensList = theaterScreens;
                 return View("ManageTheaterScreens",viewModel);
             }
             return View(viewModel);
@@ -51,7 +50,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
         //private methods
         private List<SelectListItem> GetTheatersAsSelectList() 
         {
-            return _unitOfWork.Theaters.GetAll()
+            return _sharedService.GetTheatersList()
                                 .Select(i => new SelectListItem() 
                                 {
                                     Text = i.TheaterName,

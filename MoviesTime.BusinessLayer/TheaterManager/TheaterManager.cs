@@ -1,4 +1,5 @@
 ﻿using MoviesTime.BusinessLayer.Interface;
+using MoviesTime.Contract.Models;
 using MoviesTime.DataAccess.IRepository;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,14 @@ namespace MoviesTime.BusinessLayer.TheaterManager
             _unitOfWork = unitOfWork;   
         }
 
+        public List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID)
+        {
+            return _unitOfWork.TheaterScreens.GetAll()
+                                .Where(x=>x.TheaterID == theaterID 
+                                        && x.IsActive == true 
+                                        && x.IsAvailable == true)
+                                .ToList();
+        }
         
     }
 }
