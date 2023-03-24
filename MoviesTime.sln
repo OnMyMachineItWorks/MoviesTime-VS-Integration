@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.Contract", "Movi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.Utility", "MoviesTime.Utility\MoviesTime.Utility.csproj", "{2C9D204A-A5DA-4BBC-8A43-34B18F542483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesTime.BusinessLayer", "MoviesTime.BusinessLayer\MoviesTime.BusinessLayer.csproj", "{5455D578-F247-4586-A264-E0CDA4D740A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.BusinessLogic", "MoviesTime.BusinessLayer\MoviesTime.BusinessLogic.csproj", "{5455D578-F247-4586-A264-E0CDA4D740A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

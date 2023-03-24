@@ -20,7 +20,7 @@ namespace MoviesTime.BusinessLayer.TheaterManager
         public List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID)
         {
             return _unitOfWork.TheaterScreens.GetAll()
-                                .Where(x=>x.TheaterID == theaterID 
+                                .Where(x=>x.TheaterID == theaterID
                                         && x.IsActive == true 
                                         && x.IsAvailable == true)
                                 .ToList();

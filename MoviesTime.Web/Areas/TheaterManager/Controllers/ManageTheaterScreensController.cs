@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
-using MoviesTime.DataAccess.IRepository;
 using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.BusinessLayer.TheaterManager;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
 {
@@ -33,6 +31,7 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
             return View(viewModel);
         }
 
+
         // Get Method for Theater Screens section
         public IActionResult GetTheaterScreens(ManageTheaterScreensViewModel viewModel) 
         {
@@ -46,17 +45,23 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateTheaterScreen(ManageTheaterScreensViewModel viewModel)
+        {
+            return RedirectToAction("GetTheaterScreens", viewModel);
+        }
 
         //private methods
         private List<SelectListItem> GetTheatersAsSelectList() 
         {
             return _sharedService.GetTheatersList()
-                                .Select(i => new SelectListItem() 
-                                {
-                                    Text = i.TheaterName,
-                                    Value = i.TheaterID.ToString() 
-                                })
-                                .ToList();
+                                 .Select(i => new SelectListItem() 
+                                 {
+                                     Text = i.TheaterName,
+                                     Value = i.TheaterID.ToString() 
+                                 })
+                                 .ToList();
         }
     }
 }

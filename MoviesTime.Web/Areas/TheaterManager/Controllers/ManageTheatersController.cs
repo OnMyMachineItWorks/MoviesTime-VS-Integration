@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesTime.BusinessLayer.Interface;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
-using MoviesTime.DataAccess.IRepository;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
 {

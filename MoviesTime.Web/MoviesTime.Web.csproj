@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoviesTime.BusinessLayer\MoviesTime.BusinessLayer.csproj" />
+    <ProjectReference Include="..\MoviesTime.BusinessLayer\MoviesTime.BusinessLogic.csproj" />
     <ProjectReference Include="..\MoviesTime.DataAccess\MoviesTime.DataAccess.csproj" />
   </ItemGroup>
 

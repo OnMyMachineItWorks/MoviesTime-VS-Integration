@@ -17,7 +17,8 @@ namespace MoviesTime.Contract.Models
         [ForeignKey("TheaterID")]
         public Theaters Theaters { get; set; }
         public int TheaterID { get; set; }
-        
+
+        public string? ScreenDescription { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsActive { get; set; }
     }
