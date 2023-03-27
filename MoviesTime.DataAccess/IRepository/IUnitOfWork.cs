@@ -11,6 +11,8 @@ namespace MoviesTime.DataAccess.IRepository
         IUsersRepository Users { get; }
         ITheatersRepository Theaters { get; }
         ITheaterScreensRepository TheaterScreens { get; }
+        IGenreRepository Genres { get; }
+        ILanguageRepository Languages { get; }
 
         void Save();
     }

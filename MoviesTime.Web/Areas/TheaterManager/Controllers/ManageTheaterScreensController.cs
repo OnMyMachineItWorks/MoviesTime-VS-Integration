@@ -3,65 +3,98 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.BusinessLayer.Interface;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace MoviesTime.Web.Areas.TheaterManager.Controllers 
+namespace MoviesTime.Web.Areas.TheaterManager.Controllers;
+
+[Area("TheaterManager")]
+public class ManageTheaterScreensController : Controller 
 {
-    [Area("TheaterManager")]
-    public class ManageTheaterScreensController : Controller 
+    private readonly ISharedService _sharedService;
+    private readonly ITheaterManager _theaterManager;
+    public ManageTheaterScreensController(ISharedService sharedService, ITheaterManager theaterManager) 
     {
-        private readonly ISharedService _sharedService;
-        private readonly ITheaterManager _theaterManager;
-        public ManageTheaterScreensController(ISharedService sharedService, ITheaterManager theaterManager) 
+        _sharedService = sharedService;
+        _theaterManager = theaterManager;
+    }
+
+    /// <summary>
+    /// public Action methods
+    /// </summary>
+    /// <returns></returns>
+    // Default Method on Page load
+    public IActionResult ManageTheaterScreens(ManageTheaterScreensViewModel viewModel) 
+    {
+        viewModel.selectTheaterList = GetTheatersAsSelectList();
+        return View(viewModel);
+    }
+
+
+    // Get Method for Theater Screens section
+    public IActionResult GetTheaterScreens(ManageTheaterScreensViewModel viewModel) 
+    {
+        if (viewModel.isEditMode) 
+          return View("ManageTheaterScreens", viewModel); 
+        if (viewModel.selectedTheaterID > 0) 
         {
-            _sharedService = sharedService;
-            _theaterManager = theaterManager;
+            List<TheaterScreen> theaterScreens = _theaterManager.GetTheaterScreensByTheaterID(viewModel.selectedTheaterID);
+            viewModel.selectTheaterList = GetTheatersAsSelectList();
+            viewModel.theaterScreensList = theaterScreens;
+            return View("ManageTheaterScreens", viewModel);
         }
+        
+        return View(viewModel);
+    }
 
-        /// <summary>
-        /// public Action methods
-        /// </summary>
-        /// <returns></returns>
-        // Default Method on Page load
-        public IActionResult ManageTheaterScreens() 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult CreateTheaterScreen(ManageTheaterScreensViewModel viewModel)
+    {
+        if (viewModel.selectedTheaterID > 0
+            && viewModel.theaterScreen != null 
+            && viewModel.theaterScreen.ScreenName != null) 
         {
-            ManageTheaterScreensViewModel viewModel = new ManageTheaterScreensViewModel() 
-            {
-                selectTheaterList = GetTheatersAsSelectList(),
-            };
-            return View(viewModel);
-        }
-
-
-        // Get Method for Theater Screens section
-        public IActionResult GetTheaterScreens(ManageTheaterScreensViewModel viewModel) 
-        {
-            if (viewModel.selectedTheaterID > 0) 
-            {
-                List<TheaterScreen> theaterScreens = _theaterManager.GetTheaterScreensByTheaterID(viewModel.selectedTheaterID);
-                viewModel.selectTheaterList = GetTheatersAsSelectList();
-                viewModel.theaterScreensList = theaterScreens;
-                return View("ManageTheaterScreens",viewModel);
-            }
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateTheaterScreen(ManageTheaterScreensViewModel viewModel)
-        {
+            TheaterScreen theaterScreen = new TheaterScreen()
+                {
+                    TheaterID = viewModel.selectedTheaterID,
+                    ScreenName = viewModel.theaterScreen.ScreenName,
+                    ScreenDescription = viewModel.theaterScreen.ScreenDescription,
+                    IsAvailable = true,
+                    IsActive = true,
+                };
+            //_theaterManager.CreateTheaterScreen(theaterScreen);
             return RedirectToAction("GetTheaterScreens", viewModel);
         }
+        return RedirectToAction("ManageTheaterScreens");
+    }
 
-        //private methods
-        private List<SelectListItem> GetTheatersAsSelectList() 
+    public IActionResult EditTheaterScreen(int id)
+    {
+        TheaterScreen theaterScreenFromDB = _sharedService.GetTheaterScreenByID(id);
+        ManageTheaterScreensViewModel viewModel = new ManageTheaterScreensViewModel()
         {
-            return _sharedService.GetTheatersList()
-                                 .Select(i => new SelectListItem() 
-                                 {
-                                     Text = i.TheaterName,
-                                     Value = i.TheaterID.ToString() 
-                                 })
-                                 .ToList();
-        }
+            selectedTheaterID = theaterScreenFromDB.TheaterID,
+            selectTheaterList = GetTheatersAsSelectList(),
+            theaterScreen = theaterScreenFromDB,
+            theaterScreensList = _theaterManager.GetTheaterScreensByTheaterID(theaterScreenFromDB.TheaterID),
+            isEditMode = true,
+            //lstUsers = GetUsersAsSelectList(),
+            //lstTheaters = GetTheaters(),
+            //theater = _sharedService.GetTheaterByID(id),
+            //isEditMode = true
+        };
+        return View("ManageTheaterScreens", viewModel);
+    }
+
+    //private methods
+    private List<SelectListItem> GetTheatersAsSelectList() 
+    {
+        return _sharedService.GetTheatersList()
+                             .Select(i => new SelectListItem() 
+                             {
+                                 Text = i.TheaterName,
+                                 Value = i.TheaterID.ToString() 
+                             })
+                             .ToList();
     }
 }

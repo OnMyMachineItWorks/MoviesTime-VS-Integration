@@ -17,6 +17,19 @@ namespace MoviesTime.BusinessLayer.TheaterManager
             _unitOfWork = unitOfWork;   
         }
 
+        public Theaters CreateTheater(Theaters theater)
+        {
+            _unitOfWork.Theaters.Add(theater);
+            return null;
+        }
+
+        public TheaterScreen CreateTheaterScreen(TheaterScreen theaterScreen)
+        {
+            _unitOfWork.TheaterScreens.Add(theaterScreen);
+            _unitOfWork.Save();
+            return null;
+        }
+
         public List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID)
         {
             return _unitOfWork.TheaterScreens.GetAll()
@@ -26,5 +39,15 @@ namespace MoviesTime.BusinessLayer.TheaterManager
                                 .ToList();
         }
         
+        public Genres GetGenreDetailsByID(int genreID)
+        {
+            return _unitOfWork.Genres.GetFirstOrDefault(x=>x.ID == genreID);
+        }
+
+        public Languages GetLanguageDetailsByID(int languageID) 
+        {
+            return _unitOfWork.Languages.GetFirstOrDefault(x => x.LanguageID == languageID);
+        }
+
     }
 }

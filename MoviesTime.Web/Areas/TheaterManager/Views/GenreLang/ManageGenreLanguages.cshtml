@@ -1,0 +1,148 @@
+﻿@using MoviesTime.Contract.ViewModels;
+@model ManageGenreLanguagesViewModel
+
+<div class="container mx-2 pt-3">
+    <form method="post">
+        <legend> @(!Model.IsGenreEditMode ? "Add new Genre" : "Edit Genre Details")</legend>
+        <div class="form-group row mx-1">
+            <div class="col-md-4 row pt-md-2">
+                <label class="col-form-label col-md-4" @*asp-for="theater.TheaterName"*@>Name</label>
+                <div class="col-md-8">
+                    <input id="genreName" class="form-control" placeholder="Enter Genre Name"
+                           name="genre.Name" asp-for="genre.GenreName" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row col-md-8 mx-1 pt-3">
+            <div class="text-center">
+                <button type="SubmitAction" asp-action="CreateGenre" class="btn btn-primary">Submit Genre</button>
+            </div>
+        </div>
+        @* Fieldset for storing Edit Data*@ 
+        <div>
+            <fieldset>
+                <input id="sessGenreID" asp-for="genre.ID" hidden="hidden" />
+                <input id="sessGenreName" asp-for="genre.GenreName" hidden="hidden" />
+                <input id="sessGenreEditMode" asp-for="IsGenreEditMode" hidden="hidden" />
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+<div class="container mx-5 pt-4">
+    @if (0 == 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Genre ID
+                    </th>
+                    <th>
+                        Genre Title
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.lstGenres)
+                {
+                    <tr>
+                        <td>
+                            @item.ID
+                        </td>
+                        <td>
+                            @item.GenreName
+                        </td>
+                        <td>
+                            <a asp-area="TheaterManager" asp-controller="GenreLang" asp-action="EditGenre" asp-route-id="@item.ID"><i class="bi bi-pencil-square">Edit</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No Genre Found</h2>
+    }
+</div>
+
+<div class="container mx-2 pt-3">
+    <form method="post">
+        <legend> @(!Model.IsLanguageEditMode ? "Add new Language" : "Edit language Details")</legend>
+        <div class="form-group row mx-1">
+            <div class="col-md-4 row pt-md-2">
+                <label class="col-form-label col-md-4" @*asp-for="theater.TheaterName"*@>Name</label>
+                <div class="col-md-8">
+                    <input id="languageName" class="form-control" placeholder="Enter Genre Name"
+                           name="language.Language" asp-for="language.Language" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row col-md-8 mx-1 pt-3">
+            <div class="text-center">
+                <button type="SubmitAction" asp-action="CreateLanguage" class="btn btn-primary">Submit language</button>
+            </div>
+        </div>
+        @* Fieldset for storing Edit Data*@
+        <div>
+            <fieldset>
+                <input id="languageID" asp-for="language.LanguageID" hidden="hidden" />
+                <input id="languageName" asp-for="language.Language" hidden="hidden" />
+                <input id="languageEditMode" asp-for="IsLanguageEditMode" hidden="hidden" />
+            </fieldset>
+        </div>
+    </form>
+</div>
+language
+<div class="container mx-5 pt-4">
+    @if (0 == 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        language ID
+                    </th>
+                    <th>
+                        Language Title
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.lstLanguages)
+                {
+                    <tr>
+                        <td>
+                            @item.LanguageID
+                        </td>
+                        <td>
+                            @item.Language
+                        </td>
+                        <td>
+                            <a asp-area="TheaterManager" asp-controller="GenreLang" asp-action="EditLanguage" asp-route-id="@item.LanguageID"><i class="bi bi-pencil-square">Edit</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2>No Genre Found</h2>
+    }
+</div>

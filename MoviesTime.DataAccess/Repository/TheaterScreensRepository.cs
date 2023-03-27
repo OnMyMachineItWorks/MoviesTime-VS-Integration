@@ -11,8 +11,9 @@ namespace MoviesTime.DataAccess.Repository {
             _db = db;
         }
 
-        public void Update(TheaterScreen obj) {
-            throw new NotImplementedException();
+        public void Update(TheaterScreen theaterScreen) 
+        {
+            _db.Update(theaterScreen);
         }
     }
 }

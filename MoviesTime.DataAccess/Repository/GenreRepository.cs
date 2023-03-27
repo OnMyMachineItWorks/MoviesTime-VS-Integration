@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace MoviesTime.DataAccess.Repository
 {
-    public class TheatersRepository : Repository<Theaters>, ITheatersRepository
+    public class GenreRepository : Repository<Genres>, IGenreRepository
     {
         private readonly ApplicationDbContext _db;
-        
-        public TheatersRepository(ApplicationDbContext db) :base(db) 
+        public GenreRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public void Update(Theaters theater)
+        public void Update(Genres genre)
         {
-            _db.Update(theater);
+            _db.Update(genre);
         }
     }
 }

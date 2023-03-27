@@ -14,5 +14,6 @@ namespace MoviesTime.Contract.ViewModels
         public List<TheaterScreen>? theaterScreensList { get; set; }
         public List<SelectListItem>? selectTheaterList { get; set; }
         public TheaterScreen? theaterScreen { get; set; }
+        public bool isEditMode { get; set; }
     }
 }

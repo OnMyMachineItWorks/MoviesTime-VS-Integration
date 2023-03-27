@@ -1,9 +1,4 @@
 ﻿using MoviesTime.Contract.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoviesTime.BusinessLayer.Interface
 {
@@ -12,5 +7,8 @@ namespace MoviesTime.BusinessLayer.Interface
         IEnumerable<Users> GetUsersList();
         IEnumerable<Theaters> GetTheatersList();
         Theaters GetTheaterByID(int id);
+        TheaterScreen GetTheaterScreenByID(int id);
+        List<Genres> GetGenresList();
+        List<Languages> GetLanguagesList();
     }
 }

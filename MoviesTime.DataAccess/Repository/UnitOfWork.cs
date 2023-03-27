@@ -1,4 +1,5 @@
-﻿using MoviesTime.DataAccess.Database;
+﻿using MoviesTime.Contract.Models;
+using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 
 namespace MoviesTime.DataAccess.Repository
@@ -13,11 +14,15 @@ namespace MoviesTime.DataAccess.Repository
             Users = new UsersRepository(_db);
             Theaters = new TheatersRepository(_db);
             TheaterScreens = new TheaterScreensRepository(_db);
+            Genres = new GenreRepository(_db);
+            Languages = new LanguageRepository(_db);
         }
 
         public IUsersRepository Users { get; private set; }
         public ITheatersRepository Theaters { get; private set; }
         public ITheaterScreensRepository TheaterScreens { get; private set; }
+        public IGenreRepository Genres { get; private set; }
+        public ILanguageRepository Languages { get; private set; }
 
         // Save method Implementation
         public void Save()

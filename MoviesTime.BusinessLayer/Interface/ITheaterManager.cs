@@ -10,5 +10,9 @@ namespace MoviesTime.BusinessLayer.Interface
     public interface ITheaterManager
     {
         List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID);
+        Theaters CreateTheater(Theaters theaters);
+        TheaterScreen CreateTheaterScreen(TheaterScreen theaterScreen);
+        Genres GetGenreDetailsByID(int genreID);
+        Languages GetLanguageDetailsByID(int languageID);
     }
 }
