@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.DataAccess", "Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.Contract", "MoviesTime.Contract\MoviesTime.Contract.csproj", "{8461F965-7243-4065-8682-60472EEB6B2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.Utility", "MoviesTime.Utility\MoviesTime.Utility.csproj", "{2C9D204A-A5DA-4BBC-8A43-34B18F542483}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesTime.BusinessLogic", "MoviesTime.BusinessLayer\MoviesTime.BusinessLogic.csproj", "{5455D578-F247-4586-A264-E0CDA4D740A1}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{8461F965-7243-4065-8682-60472EEB6B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8461F965-7243-4065-8682-60472EEB6B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8461F965-7243-4065-8682-60472EEB6B2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C9D204A-A5DA-4BBC-8A43-34B18F542483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C9D204A-A5DA-4BBC-8A43-34B18F542483}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C9D204A-A5DA-4BBC-8A43-34B18F542483}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C9D204A-A5DA-4BBC-8A43-34B18F542483}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5455D578-F247-4586-A264-E0CDA4D740A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5455D578-F247-4586-A264-E0CDA4D740A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5455D578-F247-4586-A264-E0CDA4D740A1}.Release|Any CPU.ActiveCfg = Release|Any CPU

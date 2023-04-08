@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.Contract.ViewModels 
+namespace MoviesTime.Contract.ViewModels;
+
+public class ManageTheaterScreensViewModel 
 {
-    public class ManageTheaterScreensViewModel 
-    {
-        public int selectedTheaterID { get; set; }
-        public List<TheaterScreen>? theaterScreensList { get; set; }
-        public List<SelectListItem>? selectTheaterList { get; set; }
-        public TheaterScreen? theaterScreen { get; set; }
-        public bool isEditMode { get; set; }
-    }
+    public int selectedTheaterID { get; set; }
+    public List<TheaterScreen>? theaterScreensList { get; set; }
+    public List<SelectListItem>? selectTheaterList { get; set; }
+    public TheaterScreen? theaterScreen { get; set; }
+    public bool isEditMode { get; set; }
 }

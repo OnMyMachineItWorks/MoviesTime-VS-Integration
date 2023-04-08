@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.BusinessLayer.Interface;
-
-public interface ICustomer
+namespace MoviesTime.DataAccess.IRepository
 {
-    
+    public interface IMoviesRepository : IRepository<Movies>
+    {
+        void Update(Movies obj);
+    }
 }

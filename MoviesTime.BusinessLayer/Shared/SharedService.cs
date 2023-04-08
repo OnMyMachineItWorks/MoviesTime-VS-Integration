@@ -41,4 +41,8 @@ public class SharedService : ISharedService
     {
         return _unitOfWork.Languages.GetAll().ToList();
     }
+    public List<Movies> GetMoviesList()
+    {
+        return _unitOfWork.Movies.GetAll().ToList();
+    }
 }

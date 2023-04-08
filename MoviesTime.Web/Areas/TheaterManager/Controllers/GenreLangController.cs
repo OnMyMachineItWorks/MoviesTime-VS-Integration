@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MoviesTime.BusinessLayer.Interface;
 using MoviesTime.Contract.Models;
 using MoviesTime.Contract.ViewModels;
@@ -21,19 +22,26 @@ public class GenreLangController : Controller
     public IActionResult ManageGenreLanguages(ManageGenreLanguagesViewModel viewModel)
     {
         viewModel.lstGenres = GetGenresList();
-        viewModel.lstLanguages = GetlanguagesList();
+        viewModel.lstLanguages = GetLanguagesList();
         return View(viewModel);
     }
 
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult CreateGenre(ManageGenreLanguagesViewModel viewModel) 
     {
-
+        //if (!viewModel.genre.GenreName.IsNullOrEmpty()
+        //    && viewModel.genre.ID == 0)  
+        //    _theaterManager.CreateGenre(viewModel.genre);
         return RedirectToAction("ManageGenreLanguages");
     }
 
     public IActionResult CreateLanguage(ManageGenreLanguagesViewModel viewModel)
     {
-
+        //if (!viewModel.language.Language.IsNullOrEmpty() 
+        //    && viewModel.language.LanguageID == 0)
+        //    _theaterManager.CreateLanguage(viewModel.language);
         return RedirectToAction("ManageGenreLanguages");
     }
 
@@ -43,7 +51,7 @@ public class GenreLangController : Controller
         {
             genre = _theaterManager.GetGenreDetailsByID(id),
             lstGenres = GetGenresList(),
-            lstLanguages = GetlanguagesList(),
+            lstLanguages = GetLanguagesList(),
             IsGenreEditMode = true
         };
         return View("ManageGenreLanguages", viewModel);
@@ -55,7 +63,7 @@ public class GenreLangController : Controller
         {
             language = _theaterManager.GetLanguageDetailsByID(id),
             lstGenres = GetGenresList(),
-            lstLanguages = GetlanguagesList(),
+            lstLanguages = GetLanguagesList(),
             IsLanguageEditMode = true
         };
         return View("ManageGenreLanguages", viewModel);
@@ -66,7 +74,7 @@ public class GenreLangController : Controller
     {
         return _sharedService.GetGenresList();
     }
-    private List<Languages> GetlanguagesList()
+    private List<Languages> GetLanguagesList()
     {
         return _sharedService.GetLanguagesList();
     }

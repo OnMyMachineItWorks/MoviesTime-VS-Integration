@@ -7,16 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.BusinessLayer.Customer
+namespace MoviesTime.BusinessLayer.Customer;
+
+public class Customer :ICustomer
 {
-    public class Customer :ICustomer
+    private readonly IUnitOfWork _unitOfWork;
+    public Customer(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public Customer(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork =unitOfWork;
-        }
-
-
+        _unitOfWork =unitOfWork;
     }
+
+
 }

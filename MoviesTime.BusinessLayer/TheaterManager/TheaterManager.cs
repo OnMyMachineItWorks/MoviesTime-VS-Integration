@@ -1,53 +1,57 @@
 ﻿using MoviesTime.BusinessLayer.Interface;
 using MoviesTime.Contract.Models;
 using MoviesTime.DataAccess.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MoviesTime.BusinessLayer.TheaterManager
+namespace MoviesTime.BusinessLayer.TheaterManager;
+
+public class TheaterManager :ITheaterManager
 {
-    public class TheaterManager :ITheaterManager
+    private readonly IUnitOfWork _unitOfWork;
+    public TheaterManager(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public TheaterManager(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;   
-        }
+        _unitOfWork = unitOfWork;   
+    }
 
-        public Theaters CreateTheater(Theaters theater)
-        {
-            _unitOfWork.Theaters.Add(theater);
-            return null;
-        }
+    public void CreateTheater(Theaters theater)
+    {
+        _unitOfWork.Theaters.Add(theater);
+        _unitOfWork.Save();
+    }
 
-        public TheaterScreen CreateTheaterScreen(TheaterScreen theaterScreen)
-        {
-            _unitOfWork.TheaterScreens.Add(theaterScreen);
-            _unitOfWork.Save();
-            return null;
-        }
+    public void CreateTheaterScreen(TheaterScreen theaterScreen)
+    {
+        _unitOfWork.TheaterScreens.Add(theaterScreen);
+        _unitOfWork.Save();
+    }
 
-        public List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID)
-        {
-            return _unitOfWork.TheaterScreens.GetAll()
-                                .Where(x=>x.TheaterID == theaterID
-                                        && x.IsActive == true 
-                                        && x.IsAvailable == true)
-                                .ToList();
-        }
-        
-        public Genres GetGenreDetailsByID(int genreID)
-        {
-            return _unitOfWork.Genres.GetFirstOrDefault(x=>x.ID == genreID);
-        }
+    public List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID)
+    {
+        return _unitOfWork.TheaterScreens.GetAll()
+                            .Where(x=>x.TheaterID == theaterID
+                                    && x.IsActive == true 
+                                    && x.IsAvailable == true)
+                            .ToList();
+    }
 
-        public Languages GetLanguageDetailsByID(int languageID) 
-        {
-            return _unitOfWork.Languages.GetFirstOrDefault(x => x.LanguageID == languageID);
-        }
+    public void CreateGenre(Genres genre)
+    {
+        _unitOfWork.Genres.Add(genre);
+        _unitOfWork.Save();
+    }
 
+    public void CreateLanguage(Languages language)
+    {
+        _unitOfWork.Languages.Add(language);
+        _unitOfWork.Save();
+    }
+
+    public Genres GetGenreDetailsByID(int genreID)
+    {
+        return _unitOfWork.Genres.GetFirstOrDefault(x=>x.ID == genreID);
+    }
+
+    public Languages GetLanguageDetailsByID(int languageID) 
+    {
+        return _unitOfWork.Languages.GetFirstOrDefault(x => x.LanguageID == languageID);
     }
 }

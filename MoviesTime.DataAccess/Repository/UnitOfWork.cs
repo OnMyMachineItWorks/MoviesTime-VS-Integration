@@ -16,6 +16,7 @@ namespace MoviesTime.DataAccess.Repository
             TheaterScreens = new TheaterScreensRepository(_db);
             Genres = new GenreRepository(_db);
             Languages = new LanguageRepository(_db);
+            Movies = new MoviesRepository(_db);
         }
 
         public IUsersRepository Users { get; private set; }
@@ -23,6 +24,7 @@ namespace MoviesTime.DataAccess.Repository
         public ITheaterScreensRepository TheaterScreens { get; private set; }
         public IGenreRepository Genres { get; private set; }
         public ILanguageRepository Languages { get; private set; }
+        public IMoviesRepository Movies { get; private set; }
 
         // Save method Implementation
         public void Save()
