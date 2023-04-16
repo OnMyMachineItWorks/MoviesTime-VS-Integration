@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MoviesTime.Contract.Models;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.Contract.ViewModels;
 using MoviesTime.BusinessLayer.Interface;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;

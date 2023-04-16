@@ -1,4 +1,4 @@
-﻿using MoviesTime.Contract.Models;
+﻿using MoviesTime.Contract.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,6 @@ public interface ITheaterManager
     void CreateTheater(Theaters theaters);
     void CreateTheaterScreen(TheaterScreen theaterScreen);
     List<TheaterScreen> GetTheaterScreensByTheaterID(int theaterID);
-
     void CreateGenre(Genres genre);
     void CreateLanguage(Languages language);
     Genres GetGenreDetailsByID(int genreID);

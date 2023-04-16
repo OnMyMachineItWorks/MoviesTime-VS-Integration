@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.Contract.Models;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 using MoviesTime.DataAccess.Repository;

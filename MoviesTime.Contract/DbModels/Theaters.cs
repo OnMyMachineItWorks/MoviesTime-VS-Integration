@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesTime.Contract.Models
+namespace MoviesTime.Contract.DbModels
 {
     public class Theaters
     {

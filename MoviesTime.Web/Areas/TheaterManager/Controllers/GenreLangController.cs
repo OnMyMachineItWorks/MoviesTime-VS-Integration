@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.Contract.Models;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.Contract.ViewModels;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers;

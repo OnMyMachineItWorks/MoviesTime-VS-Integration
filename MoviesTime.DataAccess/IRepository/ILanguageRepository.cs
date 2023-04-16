@@ -1,4 +1,4 @@
-﻿using MoviesTime.Contract.Models;
+﻿using MoviesTime.Contract.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

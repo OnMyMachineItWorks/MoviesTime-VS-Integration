@@ -1,4 +1,4 @@
-﻿using MoviesTime.Contract.Models;
+﻿using MoviesTime.Contract.DbModels;
 
 namespace MoviesTime.BusinessLayer.Interface;
 
@@ -11,4 +11,7 @@ public interface ISharedService
     List<Genres> GetGenresList();
     List<Languages> GetLanguagesList();
     List<Movies> GetMoviesList();
+    Movies GetMovieDetailsByID(int id);
+
+    void TestGenreReturns();
 }

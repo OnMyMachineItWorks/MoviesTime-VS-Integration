@@ -1,29 +1,40 @@
 ﻿@using MoviesTime.Contract.ViewModels;
-@model ManageGenreLanguagesViewModel
+@model ManageMoviesViewModel
 
 <div class="container mx-2 pt-3">
     <form method="post">
-        <legend> @(!Model.IsGenreEditMode ? "Add new Genre" : "Edit Genre Details")</legend>
+        <legend> @(!Model.isMovieEditMode? "Add new Movie" : "Edit Movie Details")</legend>
         <div class="form-group row mx-1">
             <div class="col-md-4 row pt-md-2">
-                <label class="col-form-label col-md-4" @*asp-for="theater.TheaterName"*@>Name</label>
+                <label class="col-form-label col-md-4" asp-for="movieDetails.MovieTitle">Movie Title</label>
                 <div class="col-md-8">
-                    <input id="genreName" class="form-control" placeholder="Enter Genre Name"
-                           name="genre.GenreName" asp-for="genre.GenreName" />
+                    <input id="movieTitle" class="form-control" placeholder="Enter Movie Title"
+                           name="movieDetails.MovieTitle" asp-for="movieDetails.MovieTitle" />
                 </div>
             </div>
         </div>
+        <ul>
+            @for (var i = 0; i < Model.genreList.Count; i++)
+            {
+                <li>
+                    <input type="checkbox" asp-for="@Model.selectedGenre[i].IsChecked" />
+                    <label asp-for="@Model.selectedGenre[i].IsChecked">@Model.selectedGenre[i].Name</label>
+                    <input type="hidden" asp-for="@Model.selectedGenre[i].ID" />
+                    <input type="hidden" asp-for="@Model.selectedGenre[i].Name" />
+                </li>
+            }
+        </ul>
         <div class="form-group row col-md-8 mx-1 pt-3">
             <div class="text-center">
-                <button type="SubmitAction" asp-action="CreateGenre" class="btn btn-primary">Submit Genre</button>
+                <button type="SubmitAction" asp-action="CreateMovie" class="btn btn-primary">Create Movie</button>
             </div>
         </div>
-        @* Fieldset for storing Edit Data*@
+        @* Fieldset for storing Edit Data *@
         <div>
             <fieldset>
-                <input id="sessGenreID" asp-for="genre.ID" hidden="hidden" />
-                <input id="sessGenreName" asp-for="genre.GenreName" hidden="hidden" />
-                <input id="sessGenreEditMode" asp-for="IsGenreEditMode" hidden="hidden" />
+                <input id="sessMovieID" asp-for="movieDetails.MovieID" hidden="hidden" />
+                @* <input id="sessGenreName" asp-for="genre.GenreName" hidden="hidden" /> *@
+                <input id="sessMovieEditMode" asp-for="isMovieEditMode" hidden="hidden" />
             </fieldset>
         </div>
     </form>
@@ -36,10 +47,10 @@
             <thead>
                 <tr>
                     <th>
-                        Genre ID
+                        Movie ID
                     </th>
                     <th>
-                        Genre Title
+                        Movie Title
                     </th>
                     <th>
                         Edit
@@ -51,17 +62,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.lstGenres)
+                @foreach (var item in Model.moviesList)
                 {
                     <tr>
                         <td>
-                            @item.ID
+                            @item.MovieID
                         </td>
                         <td>
-                            @item.GenreName
+                            @item.MovieTitle
                         </td>
                         <td>
-                            <a asp-area="TheaterManager" asp-controller="GenreLang" asp-action="EditGenre" asp-route-id="@item.ID"><i class="bi bi-pencil-square">Edit</i></a>
+                            <a asp-area="TheaterManager" asp-controller="ManageMovies" asp-action="EditMovies" asp-route-id="@item.MovieID"><i class="bi bi-pencil-square">Edit</i></a>
                         </td>
                     </tr>
                 }
@@ -70,6 +81,6 @@
     }
     else
     {
-        <h2>No Genre Found</h2>
+        <h2>No movies found</h2>
     }
 </div>

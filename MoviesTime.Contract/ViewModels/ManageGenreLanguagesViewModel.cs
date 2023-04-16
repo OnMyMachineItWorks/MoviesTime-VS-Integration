@@ -1,4 +1,4 @@
-﻿using MoviesTime.Contract.Models;
+﻿using MoviesTime.Contract.DbModels;
 
 namespace MoviesTime.Contract.ViewModels;
 

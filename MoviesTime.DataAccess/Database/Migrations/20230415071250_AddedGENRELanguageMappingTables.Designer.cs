@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesTime.DataAccess.Database;
 
@@ -11,9 +12,11 @@ using MoviesTime.DataAccess.Database;
 namespace MoviesTime.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230415071250_AddedGENRELanguageMappingTables")]
+    partial class AddedGENRELanguageMappingTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,13 +234,13 @@ namespace MoviesTime.DataAccess.Migrations
             modelBuilder.Entity("MoviesTime.Contract.Models.MovieGenreMapping", b =>
                 {
                     b.HasOne("MoviesTime.Contract.Models.Genres", "Genre")
-                        .WithMany("MovieGenreMappings")
+                        .WithMany()
                         .HasForeignKey("GenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MoviesTime.Contract.Models.Movies", "Movies")
-                        .WithMany("MovieGenreMappings")
+                        .WithMany()
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -250,13 +253,13 @@ namespace MoviesTime.DataAccess.Migrations
             modelBuilder.Entity("MoviesTime.Contract.Models.MovieLanguageMapping", b =>
                 {
                     b.HasOne("MoviesTime.Contract.Models.Languages", "Languages")
-                        .WithMany("MovieLanguageMappings")
+                        .WithMany()
                         .HasForeignKey("LanguageID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MoviesTime.Contract.Models.Movies", "Movies")
-                        .WithMany("MovieLanguageMappings")
+                        .WithMany()
                         .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -295,23 +298,6 @@ namespace MoviesTime.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("MoviesTime.Contract.Models.Genres", b =>
-                {
-                    b.Navigation("MovieGenreMappings");
-                });
-
-            modelBuilder.Entity("MoviesTime.Contract.Models.Languages", b =>
-                {
-                    b.Navigation("MovieLanguageMappings");
-                });
-
-            modelBuilder.Entity("MoviesTime.Contract.Models.Movies", b =>
-                {
-                    b.Navigation("MovieGenreMappings");
-
-                    b.Navigation("MovieLanguageMappings");
                 });
 #pragma warning restore 612, 618
         }

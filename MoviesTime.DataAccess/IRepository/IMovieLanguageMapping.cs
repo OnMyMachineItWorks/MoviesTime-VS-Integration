@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace MoviesTime.DataAccess.IRepository
 {
-    public interface IUsersRepository : IRepository<Users> 
+    public interface IMovieLanguageMapping : IRepository<MovieLanguageMapping>
     {
-        void Update(Users obj);
     }
 }

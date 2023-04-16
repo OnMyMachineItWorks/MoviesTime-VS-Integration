@@ -1,5 +1,5 @@
 ﻿using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.Contract.Models;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.DataAccess.IRepository;
 
 namespace MoviesTime.BusinessLayer.TheaterManager;

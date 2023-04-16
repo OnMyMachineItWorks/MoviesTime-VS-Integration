@@ -1,4 +1,4 @@
-﻿using MoviesTime.Contract.Models;
+﻿using MoviesTime.Contract.DbModels;
 using MoviesTime.DataAccess.Database;
 using MoviesTime.DataAccess.IRepository;
 

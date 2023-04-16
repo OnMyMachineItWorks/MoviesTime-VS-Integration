@@ -1,5 +1,5 @@
 ﻿using MoviesTime.BusinessLayer.Interface;
-using MoviesTime.Contract.Models;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.DataAccess.IRepository;
 using System;
 using System.Collections.Generic;

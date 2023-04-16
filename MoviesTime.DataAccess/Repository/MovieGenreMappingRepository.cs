@@ -4,16 +4,14 @@ using MoviesTime.DataAccess.IRepository;
 
 namespace MoviesTime.DataAccess.Repository;
 
-public class LanguageRepository :Repository<Languages>, ILanguageRepository
+public class MovieGenreMappingRepository : Repository<MovieGenreMapping>, IMovieGenreMapping
 {
     private readonly ApplicationDbContext _db;
-    public LanguageRepository(ApplicationDbContext db) : base (db)
+
+    public MovieGenreMappingRepository(ApplicationDbContext db) : base(db)
     {
         _db = db;
     }
 
-    public void Update(Languages language)
-    {
-        _db.Update(language);
-    }
+
 }
