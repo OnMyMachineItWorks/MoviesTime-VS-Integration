@@ -19,8 +19,6 @@ public class ManageMoviesController : Controller
     public IActionResult ManageMovies(ManageMoviesViewModel viewModel)
     {
         viewModel = GetViewModelFromDB();
-        _sharedService.TestGenreReturns();
-        //viewModel.selectedGenre = 
         return View(viewModel);
     }
 

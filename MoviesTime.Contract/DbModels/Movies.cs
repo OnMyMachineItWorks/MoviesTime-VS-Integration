@@ -12,17 +12,18 @@ public class Movies
 {
     [Key]
     public int MovieID { get; set; }
-    public string MovieTitle { get; set; }
 
+    [Required]
+    public required string MovieTitle { get; set; }
     
     [ForeignKey("TheaterID")]
-    public Theaters Theaters { get; set; }
+    public Theaters? Theaters { get; set; }
     public int? TheaterID { get; set; }
 
     public TimeSpan? MovieLength { get; set; }
     public bool IsActive { get; set; }
 
-    public ICollection<MovieGenreMapping> MovieGenreMappings { get; set; }
-    public ICollection<MovieLanguageMapping> MovieLanguageMappings { get; set; }
+    public ICollection<MovieGenreMapping>? MovieGenreMappings { get; set; }
+    public ICollection<MovieLanguageMapping>? MovieLanguageMappings { get; set; }
 
 }

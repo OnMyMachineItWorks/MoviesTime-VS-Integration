@@ -13,5 +13,5 @@ public interface ISharedService
     List<Movies> GetMoviesList();
     Movies GetMovieDetailsByID(int id);
 
-    void TestGenreReturns();
+    Movies GetMovieGenresByMovieId(int id);
 }

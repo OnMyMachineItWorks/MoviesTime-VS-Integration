@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <ul>
+        @*<ul>
             @for (var i = 0; i < Model.genreList.Count; i++)
             {
                 <li>
@@ -23,7 +23,7 @@
                     <input type="hidden" asp-for="@Model.selectedGenre[i].Name" />
                 </li>
             }
-        </ul>
+        </ul>*@
         <div class="form-group row col-md-8 mx-1 pt-3">
             <div class="text-center">
                 <button type="SubmitAction" asp-action="CreateMovie" class="btn btn-primary">Create Movie</button>

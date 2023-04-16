@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoviesTime.Contract.DbModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,6 @@ public interface IUnitOfWork
 
     void Save();
 
-    void GetMovieGenresByMovieId();
-    void GetMovieLanguagesByMovieId();
+    Movies GetMovieGenresByMovieId(int id);
+    Movies GetMovieLanguagesByMovieId(int id);
 }

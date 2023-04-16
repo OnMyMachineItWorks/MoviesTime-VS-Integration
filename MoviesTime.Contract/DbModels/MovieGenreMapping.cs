@@ -12,11 +12,11 @@ public class MovieGenreMapping
     public int ID { get; set; }
 
     [ForeignKey("MovieID")]
-    public Movies Movies { get; set; }
+    public Movies? Movies { get; set; }
     public int MovieID { get; set; }
 
     [ForeignKey("GenreID")]
-    public Genres Genre { get; set; }
+    public Genres? Genre { get; set; }
     public int GenreID { get; set; }
 
     public bool IsActive { get; set; }

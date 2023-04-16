@@ -34,17 +34,23 @@ public class SharedService : ISharedService
 
     public List<Genres> GetGenresList()
     {
-        return _unitOfWork.Genres.GetAll().ToList();
+        return _unitOfWork.Genres.GetAll()
+                                 .Where(genre => genre.IsActive == true)
+                                 .ToList();
     }
 
     public List<Languages> GetLanguagesList()
     {
-        return _unitOfWork.Languages.GetAll().ToList();
+        return _unitOfWork.Languages.GetAll()
+                                    .Where (language => language.IsActive == true)
+                                    .ToList();
     }
+
     public List<Movies> GetMoviesList()
     {
         return _unitOfWork.Movies.GetAll().ToList();
     }
+
     public Movies GetMovieDetailsByID(int id) 
     {
         return _unitOfWork.Movies.GetFirstOrDefault(x => x.MovieID == id);
@@ -53,8 +59,8 @@ public class SharedService : ISharedService
     //{
     //    return _unitOfWork.Movies.GetFirstOrDefault(x => x.MovieID == id);
     //}
-    public void TestGenreReturns() 
+    public Movies GetMovieGenresByMovieId(int id) 
     {
-        _unitOfWork.GetMovieGenresByMovieId();
+        return _unitOfWork.GetMovieGenresByMovieId(id);
     }
 }

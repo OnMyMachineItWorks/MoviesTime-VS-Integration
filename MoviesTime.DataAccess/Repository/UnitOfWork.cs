@@ -36,21 +36,19 @@ namespace MoviesTime.DataAccess.Repository
         }
 
         // Using MovieID, Returns a Movie and all genres related to that movie.
-        public void GetMovieGenresByMovieId() 
+        public Movies GetMovieGenresByMovieId(int id) 
         {
-            var a = _db.Movies.Include(m => m.MovieGenreMappings)
-                                          .ThenInclude(gm => gm.Genre)
-                                          .ToList();
-            int b = 1;
+            return _db.Movies.Include(m => m.MovieGenreMappings !)
+                            .ThenInclude(gm => gm.Genre)
+                            .FirstOrDefault(m => m.MovieID == id);
         }
 
         // Using MovieID, Returns a Movie and all Languages related to that movie.
-        public void GetMovieLanguagesByMovieId() 
+        public Movies GetMovieLanguagesByMovieId(int id) 
         {
-            var a = _db.Movies.Include(m => m.MovieLanguageMappings)
-                                          .ThenInclude(mlm => mlm.Languages)
-                                          .ToList();
-            int b = 1;
+            return _db.Movies.Include(m => m.MovieLanguageMappings !)
+                            .ThenInclude(mlm => mlm.Languages)
+                            .FirstOrDefault(m => m.MovieID == id);
         } 
 
     }
