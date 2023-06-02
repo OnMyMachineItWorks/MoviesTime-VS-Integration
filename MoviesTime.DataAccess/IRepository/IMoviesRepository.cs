@@ -10,5 +10,6 @@ namespace MoviesTime.DataAccess.IRepository
     public interface IMoviesRepository : IRepository<Movies>
     {
         void Update(Movies obj);
+        Movies GetByMovieIdWithMappings(int movieId);
     }
 }

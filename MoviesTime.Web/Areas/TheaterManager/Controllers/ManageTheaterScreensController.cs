@@ -30,7 +30,7 @@ public class ManageTheaterScreensController : Controller
     }
 
 
-    // Get Method for Theater Screens section
+    // Fetch Theater Screens section
     public IActionResult GetTheaterScreens(ManageTheaterScreensViewModel viewModel) 
     {
         if (viewModel.isEditMode) 

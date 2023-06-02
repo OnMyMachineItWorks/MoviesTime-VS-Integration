@@ -18,6 +18,5 @@ public interface IUnitOfWork
 
     void Save();
 
-    Movies GetMovieGenresByMovieId(int id);
-    Movies GetMovieLanguagesByMovieId(int id);
+    //Movies GetMoviesWithMappings(int id);
 }

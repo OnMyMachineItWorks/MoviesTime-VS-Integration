@@ -16,4 +16,7 @@ public interface ITheaterManager
     void CreateLanguage(Languages language);
     Genres GetGenreDetailsByID(int genreID);
     Languages GetLanguageDetailsByID(int languageID);
+
+    void CreateMovie(Movies Movie, List<int> genreIDs, List<int> languageIDs);
+    void UpdateMovie(Movies updatedMovie, List<int> genreIDs, List<int> languageIDs);
 }

@@ -23,7 +23,14 @@ public class Movies
     public TimeSpan? MovieLength { get; set; }
     public bool IsActive { get; set; }
 
-    public ICollection<MovieGenreMapping>? MovieGenreMappings { get; set; }
-    public ICollection<MovieLanguageMapping>? MovieLanguageMappings { get; set; }
+    public ICollection<MovieGenreMapping> MovieGenreMappings { get; set; } = new List<MovieGenreMapping>();
+
+    public ICollection<MovieLanguageMapping> MovieLanguageMappings { get; set; } = new List<MovieLanguageMapping>();
+
+    //public Movies()
+    //{
+    //    MovieGenreMappings = new List<MovieGenreMapping>();
+    //    MovieLanguageMappings = new List<MovieLanguageMapping>();
+    //}
 
 }

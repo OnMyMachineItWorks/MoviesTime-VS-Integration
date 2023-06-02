@@ -13,5 +13,5 @@ public interface ISharedService
     List<Movies> GetMoviesList();
     Movies GetMovieDetailsByID(int id);
 
-    Movies GetMovieGenresByMovieId(int id);
+    Movies GetMoviesWithMappings(int id);
 }

@@ -2,8 +2,8 @@
 @model ManageMoviesViewModel
 
 <div class="container mx-2 pt-3">
-    <form method="post">
-        <legend> @(!Model.isMovieEditMode? "Add new Movie" : "Edit Movie Details")</legend>
+    <form method="post" enctype="multipart/form-data">
+        <legend> @(!Model.isMovieEditMode ? "Add new Movie" : "Edit Movie Details")</legend>
         <div class="form-group row mx-1">
             <div class="col-md-4 row pt-md-2">
                 <label class="col-form-label col-md-4" asp-for="movieDetails.MovieTitle">Movie Title</label>
@@ -13,17 +13,31 @@
                 </div>
             </div>
         </div>
-        @*<ul>
-            @for (var i = 0; i < Model.genreList.Count; i++)
+
+        <div class="form-group">
+            <label asp-for="@Model.movieGenres" class="control-label">Genre</label>
+            <br />
+            @foreach (var genre in Model.genreList)
             {
-                <li>
-                    <input type="checkbox" asp-for="@Model.selectedGenre[i].IsChecked" />
-                    <label asp-for="@Model.selectedGenre[i].IsChecked">@Model.selectedGenre[i].Name</label>
-                    <input type="hidden" asp-for="@Model.selectedGenre[i].ID" />
-                    <input type="hidden" asp-for="@Model.selectedGenre[i].Name" />
-                </li>
+                <input type="checkbox" name="SelectedGenres" value="@genre.ID"
+                @(Model.movieGenres != null && Model.movieGenres.Any(g => g.ID == genre.ID && g.IsChecked) ? "checked" : "") /> @genre.GenreName
+                <br />
             }
-        </ul>*@
+            <span asp-validation-for="movieGenres" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.movieLanguages" class="control-label">Languages</label>
+            <br />
+            @foreach (var lang in Model.languageList)
+            {
+                <input type="checkbox" name="SelectedLanguages" value="@lang.LanguageID"
+                @(Model.movieLanguages != null && Model.movieLanguages.Any(g => g.ID == lang.LanguageID && g.IsChecked) ? "checked" : "") /> @lang.Language
+                <br />
+            }
+            <span asp-validation-for="movieLanguages" class="text-danger"></span>
+        </div>
+
         <div class="form-group row col-md-8 mx-1 pt-3">
             <div class="text-center">
                 <button type="SubmitAction" asp-action="CreateMovie" class="btn btn-primary">Create Movie</button>
@@ -84,3 +98,30 @@
         <h2>No movies found</h2>
     }
 </div>
+
+@*  < ul >
+            @for (var i = 0; i < Model.movieGenres.Count; i++)
+                {
+                    < li >
+                        < input type = "checkbox" asp -for= "@Model.movieGenres[i].IsChecked" />
+                        < label asp -for= "@Model.movieGenres[i].IsChecked" > @Model.genreList[i].GenreName </ label >
+                        < input type = "hidden" asp -for= "@Model.movieGenres[i].ID" />
+                        < input type = "hidden" asp -for= "@Model.genreList[i].GenreName" />
+                    </ li >
+                }
+
+        </ ul >*@
+@*@foreach (var genre in Model.genreList)
+        {
+            <div class="form-check">
+                @{
+                    bool isChecked = false;
+                    if (Model.isMovieEditMode && Model.movieGenres != null)
+                    {
+                        isChecked = Model.movieGenres.Single(g => g.ID == genre.ID).IsChecked;
+                    }
+                }
+                <input type="checkbox" asp-for="@isChecked" value="@genre.ID" />
+                <label class="form-check-label">@genre.GenreName</label>
+            </div>
+        }*@

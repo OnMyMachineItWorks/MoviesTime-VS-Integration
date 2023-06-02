@@ -59,8 +59,8 @@ public class SharedService : ISharedService
     //{
     //    return _unitOfWork.Movies.GetFirstOrDefault(x => x.MovieID == id);
     //}
-    public Movies GetMovieGenresByMovieId(int id) 
+    public Movies GetMoviesWithMappings(int id) 
     {
-        return _unitOfWork.GetMovieGenresByMovieId(id);
+        return _unitOfWork.Movies.GetByMovieIdWithMappings(id);
     }
 }

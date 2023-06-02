@@ -9,7 +9,7 @@ namespace MoviesTime.Contract.DbModels;
 
 public class MovieGenreMapping
 {
-    public int ID { get; set; }
+    public int? ID { get; set; }
 
     [ForeignKey("MovieID")]
     public Movies? Movies { get; set; }
