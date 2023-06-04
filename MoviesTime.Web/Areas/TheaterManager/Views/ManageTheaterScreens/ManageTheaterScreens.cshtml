@@ -62,7 +62,10 @@
 </div>
 
 <div class="container mx-5 pt-4">
-    @if (Model.theaterScreensList != null)
+    @if (Model.theaterScreensList == null)
+    {
+        <h2>No Theaters Found</h2>
+    }else
     {
         <table class="table">
             <thead>
@@ -108,14 +111,28 @@
                         <td>
                             <a asp-area="TheaterManager" asp-controller="ManageTheaterScreens" asp-action="EditTheaterScreen" asp-route-id="@item.ScreenID"><i class="bi bi-pencil-square">Edit</i></a>
                         </td>
+                        <td>
+                            @* Delete function with popup *@
+                            <a id="btnDelete" data-id="@item.ScreenID" class="btn btn-danger btn-sm delete-button" style="margin-left: 5px">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     }
-    else
-    {
-        <h2>No Theaters Found</h2>
+    @{
+        var deleteConfirmationModel = new DeleteConfirmationModel
+            {
+                EntityName = "theaterScreen",
+                Action = "DeleteTheaterScreen",
+                Controller = "ManageTheaterScreens",
+                EntityDataID = "ScreenID"
+            };
+        <partial name="../_DeleteConfirmation" model="deleteConfirmationModel" />
     }
+    
+    
 </div>
 

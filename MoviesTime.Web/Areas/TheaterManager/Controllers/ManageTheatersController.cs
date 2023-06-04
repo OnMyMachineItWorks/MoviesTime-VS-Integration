@@ -9,7 +9,6 @@ namespace MoviesTime.Web.Areas.TheaterManager.Controllers;
 [Area("TheaterManager")]
 public class ManageTheatersController : Controller 
 {
-    //configure unit of work
     private readonly ISharedService _sharedService;
 
     public ManageTheatersController(ISharedService sharedService) 
@@ -30,9 +29,9 @@ public class ManageTheatersController : Controller
         return View(viewModel);
     }
 
+    // Submit action method
     [HttpPost]
     [ValidateAntiForgeryToken]
-    // Submit action method
     public IActionResult CreateTheater(ManageTheatersViewModel theaters) 
     {
         if (theaters.theater != null 
@@ -46,6 +45,7 @@ public class ManageTheatersController : Controller
         return RedirectToAction("ManageTheaters");
     }
 
+    //populate fields on edit click
     public IActionResult EditTheater(int id) 
     {
         ManageTheatersViewModel viewModel = new ManageTheatersViewModel() 
@@ -56,6 +56,19 @@ public class ManageTheatersController : Controller
             isEditMode = true
         };
         return View("ManageTheaters", viewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteTheater(int id)
+    {
+        // Delete the customer logic
+
+        // Set the success message in ViewData
+        //ViewData["DeleteSuccess"] = "Customer deleted successfully.";
+
+        // Redirect back to the view
+        return RedirectToAction("Index");
     }
 
     /// <summary>

@@ -69,6 +69,31 @@ public class GenreLangController : Controller
         return View("ManageGenreLanguages", viewModel);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteGenre(int id)
+    {
+        // Delete the customer logic
+
+        // Set the success message in ViewData
+        //ViewData["DeleteSuccess"] = "Customer deleted successfully.";
+
+        // Redirect back to the view
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteLanguage(int id)
+    {
+        // Delete the customer logic
+
+        // Set the success message in ViewData
+        //ViewData["DeleteSuccess"] = "Customer deleted successfully.";
+
+        // Redirect back to the view
+        return RedirectToAction("Index");
+    }
     // Private Methods
     private List<Genres> GetGenresList()
     {

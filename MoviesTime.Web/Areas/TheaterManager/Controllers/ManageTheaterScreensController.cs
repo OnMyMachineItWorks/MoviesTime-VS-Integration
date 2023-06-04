@@ -86,6 +86,19 @@ public class ManageTheaterScreensController : Controller
         return View("ManageTheaterScreens", viewModel);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteTheaterScreen(int id)
+    {
+        // Delete the customer logic
+
+        // Set the success message in ViewData
+        //ViewData["DeleteSuccess"] = "Customer deleted successfully.";
+
+        // Redirect back to the view
+        return RedirectToAction("Index");
+    }
+
     //private methods
     private List<SelectListItem> GetTheatersAsSelectList() 
     {

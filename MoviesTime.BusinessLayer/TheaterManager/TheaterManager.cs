@@ -64,31 +64,94 @@ public class TheaterManager : ITheaterManager
             movie.MovieTitle = "TestGenreLanguage";
 
         genreIDs?.ForEach(genreID =>
-        {
-            var movieGenre = new MovieGenreMapping { MovieID = movie.MovieID, GenreID = genreID };
-            movie.MovieGenreMappings.Add(movieGenre);
-        }
-        );
+                    {
+                        var movieGenre = new MovieGenreMapping { MovieID = movie.MovieID, GenreID = genreID };
+                        movie.MovieGenreMappings.Add(movieGenre);
+                    });
         languageIDs?.ForEach(languageID =>
-        {
-            var movieLanguage = new MovieLanguageMapping { MovieID = movie.MovieID, LanguageID = languageID };
-            movie.MovieLanguageMappings.Add(movieLanguage);
-        });
+                    {
+                        var movieLanguage = new MovieLanguageMapping { MovieID = movie.MovieID, LanguageID = languageID };
+                        movie.MovieLanguageMappings.Add(movieLanguage);
+                    });
         _unitOfWork.Movies.Add(movie);
         _unitOfWork.Save();
     }
 
     public void UpdateMovie(Movies updatedMovie, List<int> genreIDs, List<int> languageIDs)
     {
+        //Get Movie details from DB
         Movies movie = _unitOfWork.Movies.GetByMovieIdWithMappings(updatedMovie.MovieID);
 
-        if (updatedMovie.MovieTitle.IsNullOrEmpty())
-            updatedMovie.MovieTitle = movie.MovieTitle.IsNullOrEmpty() ? "TestEmptyUpdateMovie" : movie.MovieTitle;
+        // Update genre associations
+        var existingGenreIds = movie.MovieGenreMappings.Select(g => g.GenreID).ToList();
+        if (genreIDs != null)
+        {
+            var addedGenres = genreIDs.Except(existingGenreIds);
+            var removedGenres = existingGenreIds.Except(genreIDs);
+            
+            foreach (var genreId in addedGenres)
+            {
+                var genreMapping = new MovieGenreMapping { GenreID = genreId };
+                movie.MovieGenreMappings.Add(genreMapping);
+            }
+
+            foreach (var genreId in removedGenres)
+            {
+                var genreMapping = movie.MovieGenreMappings.FirstOrDefault(g => g.GenreID == genreId);
+                if (genreMapping != null)
+                {
+                    movie.MovieGenreMappings.Remove(genreMapping);
+                }
+            }
+        }
+        else  // when all genre mapping are removed from movie. 
+        {
+            foreach (var genreId in existingGenreIds)
+            {
+                var genreMapping = movie.MovieGenreMappings.FirstOrDefault(g => g.GenreID == genreId);
+                if (genreMapping != null)
+                {
+                    movie.MovieGenreMappings.Remove(genreMapping);
+                }
+            }
+        }
+
+        // Update language associations
+        var existingLanguageIds = movie.MovieLanguageMappings.Select(g => g.LanguageID).ToList();
+        if (languageIDs != null)
+        {
+            var addedLanguages = languageIDs.Except(existingLanguageIds);
+            var removedLanguages = existingLanguageIds.Except(languageIDs);
+
+            foreach (var languageId in addedLanguages)
+            {
+                var languageMapping = new MovieLanguageMapping { LanguageID = languageId };
+                movie.MovieLanguageMappings.Add(languageMapping);
+            }
+
+            foreach (var languageId in removedLanguages)
+            {
+                var languageMapping = movie.MovieLanguageMappings.FirstOrDefault(g => g.LanguageID == languageId);
+                if (languageMapping != null)
+                {
+                    movie.MovieLanguageMappings.Remove(languageMapping);
+                }
+            }
+        }
+        else // when all languages mapping are removed from movie.
+        {
+            foreach (var languageId in existingLanguageIds)
+            {
+                var languageMapping = movie.MovieLanguageMappings.FirstOrDefault(g => g.LanguageID == languageId);
+                if (languageMapping != null)
+                {
+                    movie.MovieLanguageMappings.Remove(languageMapping);
+                }
+            }
+        }
+
+        //_unitOfWork.Movies.Update(movie);
+        _unitOfWork.Save();
 
     }
-
-    //public static IList<T> OrEmptyIfNull<T>(this IList<T> source)
-    //{
-    //    return source ?? Array.Empty<T>();
-    //}
 }
