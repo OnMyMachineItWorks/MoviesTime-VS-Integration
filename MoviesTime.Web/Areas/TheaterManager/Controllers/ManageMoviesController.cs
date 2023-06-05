@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MoviesTime.BusinessLayer.Interface;
+using MoviesTime.Contract.DbModels;
 using MoviesTime.Contract.ViewModels;
 
 namespace MoviesTime.Web.Areas.TheaterManager.Controllers;
@@ -32,13 +33,18 @@ public class ManageMoviesController : Controller
     [HttpPost]
     public IActionResult CreateMovie(ManageMoviesViewModel viewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("|| model state invalid ||");
+            viewModel = GetViewModelFromDB();
+            return View("ManageMovies", viewModel);
+        }
         // Edit Movie Submit click
         if (viewModel.isMovieEditMode)
         {
             _theaterManager.UpdateMovie(viewModel.movieDetails, viewModel.SelectedGenres, viewModel.SelectedLanguages);
             return RedirectToAction("ManageMovies");
         }
-
        // _theaterManager.CreateMovie(viewModel.movieDetails, viewModel.SelectedGenres, viewModel.SelectedLanguages);
         return RedirectToAction("ManageMovies");
     }

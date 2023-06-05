@@ -13,6 +13,6 @@ public class ManageTheaterScreensViewModel
     public int selectedTheaterID { get; set; }
     public List<TheaterScreen>? theaterScreensList { get; set; }
     public List<SelectListItem>? selectTheaterList { get; set; }
-    public TheaterScreen? theaterScreen { get; set; }
+    public TheaterScreen theaterScreen { get; set; }
     public bool isEditMode { get; set; }
 }

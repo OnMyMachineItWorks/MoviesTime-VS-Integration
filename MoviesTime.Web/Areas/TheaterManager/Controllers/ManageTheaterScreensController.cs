@@ -40,9 +40,9 @@ public class ManageTheaterScreensController : Controller
             List<TheaterScreen> theaterScreens = _theaterManager.GetTheaterScreensByTheaterID(viewModel.selectedTheaterID);
             viewModel.selectTheaterList = GetTheatersAsSelectList();
             viewModel.theaterScreensList = theaterScreens;
+            ModelState.Clear();
             return View("ManageTheaterScreens", viewModel);
         }
-        
         return View(viewModel);
     }
 
@@ -50,6 +50,11 @@ public class ManageTheaterScreensController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult CreateTheaterScreen(ManageTheaterScreensViewModel viewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("|| model state invalid ||");
+            return View("ManageTheaterScreens", viewModel);
+        }
         if (viewModel.selectedTheaterID > 0
             && viewModel.theaterScreen != null 
             && viewModel.theaterScreen.ScreenName != null) 

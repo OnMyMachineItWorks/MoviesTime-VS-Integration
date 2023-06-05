@@ -31,6 +31,11 @@ public class GenreLangController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult CreateGenre(ManageGenreLanguagesViewModel viewModel) 
     {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("|| model state invalid ||");
+            return View("ManageGenreLanguages", viewModel);
+        }
         //if (!viewModel.genre.GenreName.IsNullOrEmpty()
         //    && viewModel.genre.ID == 0)  
         //    _theaterManager.CreateGenre(viewModel.genre);
@@ -39,6 +44,11 @@ public class GenreLangController : Controller
 
     public IActionResult CreateLanguage(ManageGenreLanguagesViewModel viewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("|| model state invalid ||");
+            return View("ManageGenreLanguages", viewModel);
+        }
         //if (!viewModel.language.Language.IsNullOrEmpty() 
         //    && viewModel.language.LanguageID == 0)
         //    _theaterManager.CreateLanguage(viewModel.language);

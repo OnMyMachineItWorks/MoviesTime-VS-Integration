@@ -12,7 +12,7 @@ public class ManageTheatersViewModel
 {
     public List<Theaters>? lstTheaters { get; set; }
     public List<SelectListItem>? lstUsers { get; set; }
-    public Theaters? theater { get; set; }
+    public Theaters theater { get; set; }
     public bool isEditMode { get; set; } = false;
 
 }

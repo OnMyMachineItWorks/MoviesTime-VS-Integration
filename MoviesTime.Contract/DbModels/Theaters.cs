@@ -12,6 +12,8 @@ namespace MoviesTime.Contract.DbModels
     {
         [Key]
         public int TheaterID { get; set; }
+
+        [Required(ErrorMessage = "The Name field is required.")]
         public String TheaterName { get; set; }
 
         [ForeignKey("ManagerID")]

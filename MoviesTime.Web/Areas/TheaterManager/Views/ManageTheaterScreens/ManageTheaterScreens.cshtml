@@ -10,6 +10,7 @@
                 <div class="col-md-8">
                     <select class="form-select" name="selectedTheaterID" asp-items="Model.selectTheaterList" asp-for="selectedTheaterID"></select>
                 </div>
+                <span asp-validation-for="selectedTheaterID" class="text-danger"></span>
             </div>
             <div class="col-md-4 row pt-md-2 mx-1">
                 <button type="SubmitAction" asp-action="GetTheaterScreens" class="btn btn-primary text-center col-md-3">Search</button>
@@ -25,6 +26,7 @@
                     <input id="theaterScreenName" class="form-control" placeholder="Enter Theater Screen" 
                     name="theaterScreen.ScreenName" asp-for="theaterScreen.ScreenName" />
                 </div>
+                <span asp-validation-for="theaterScreen.ScreenName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row mx-1 pt-3">
@@ -35,19 +37,8 @@
                               name="theaterScreen.ScreenDescription" asp-for="theaterScreen.ScreenDescription">
                     </textarea>
                 </div>
+                @* <span asp-validation-for="theaterScreen.ScreenDescription" class="text-danger"></span> *@
             </div>
-            @*<div class="visually-hidden">
-                @* to store value of theater ID in Edit scenario //
-                <input id="theaterID" />
-            </div>*@
-            @*
-            <div class="col-md-4">
-            <label for="staticEmail" class="col-md-2 col-form-label">Email</label>
-            <div class="col-md-2">
-            <input id="movieName" class="form-control" placeholder="Enter Movie Name" />
-            </div>
-            </div>
-            *@
             <div class="col-md-4">
             </div>
             <div class="col-md-4">

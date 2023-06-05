@@ -34,6 +34,11 @@ public class ManageTheatersController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult CreateTheater(ManageTheatersViewModel theaters) 
     {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("|| model state invalid ||");
+            return View("ManageTheaters", theaters);
+        }
         if (theaters.theater != null 
                 && theaters.theater.TheaterName != null 
                 && theaters.theater.ManagerID > 0) 
